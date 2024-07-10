@@ -8,9 +8,6 @@ const contact = computed(() => {
   return store.getters.selectedContact;
 });
 
-console.log(contact.value);
-
-
 const display = ref(null);
 
 const name = ref(contact.value ? contact.value.name : "");
@@ -21,13 +18,13 @@ const preview = ref(contact.value ? contact.value.imageUrl : null);
 const file = ref(null);
 const photoUrl = ref(null);
 const closeModal = () => {
-      name.value = '';
-      phone.value =  '';
-      email.value =  '';
-      fileName.value = '';
-      preview.value = null;
-      file.value = null;
-      photoUrl.value = null;
+  name.value = "";
+  phone.value = "";
+  email.value = "";
+  fileName.value = "";
+  preview.value = null;
+  file.value = null;
+  photoUrl.value = null;
   store.commit("setSelectedContact", null);
   emits("emitDisplay");
 };
@@ -58,7 +55,26 @@ const uploadHandler = () => {
   preview.value = URL.createObjectURL(photoUrl.value);
 };
 
+const updateContact = () => {
+  if (name.value !== "" && phone.value !== "" && email.value !== "") {
+    const updatedData = {
+      id: contact.value.id,
+      name: name.value,
+      phone: phone.value,
+      email: email.value,
+      imageUrl: preview.value,
+    };
 
+    store.commit("updateContact", updatedData);
+  }
+
+  closeModal();
+};
+
+const handleSubmit = () => {
+  console.log("aqui");
+  contact.value ? updateContact() : addNewContact();
+};
 </script>
 
 <template>
@@ -69,13 +85,13 @@ const uploadHandler = () => {
   <div
     class="bg-gray-700 shadow-lg w-[500px] min-h-[200px] rounded-lg fixed mx-auto mt-4 top-[0] left-[35%] z-[1000]"
   >
-    <form class="w-full p-4" @submit.prevent="addNewContact">
+    <form class="w-full p-4" @submit.prevent="handleSubmit">
       <div class="mb-4 flex text-center justify-center items-center">
         <div
           class="flex justify-center items-center relative rounded-[50%] w-[120px] h-[120px] bg-gray-200"
         >
           <span class="text-gray-400 text-center" v-if="!preview">Profile</span>
-          
+
           <img
             v-else
             class="w-full rounded-[100%] max-h-[100%] object-cover"
@@ -119,6 +135,8 @@ const uploadHandler = () => {
         <input
           class="w-full px-2 py-1 rounded-lg border-none hover:border-none"
           type="phone"
+          min="8"
+          max="14"
           placeholder="+98"
           v-model.trim="phone"
         />
