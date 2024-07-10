@@ -4,17 +4,34 @@ import { useStore } from "vuex";
 
 const emits = defineEmits(["emitDisplay"]);
 const store = useStore();
+const contact = computed(() => {
+  return store.getters.selectedContact;
+});
+
+console.log(contact.value);
+
+
 const display = ref(null);
-const name = ref("");
-const phone = ref("");
-const email = ref("");
+
+const name = ref(contact.value ? contact.value.name : "");
+const phone = ref(contact.value ? contact.value.phone : "");
+const email = ref(contact.value ? contact.value.email : "");
 const fileName = ref("");
-const preview = ref(null);
+const preview = ref(contact.value ? contact.value.imageUrl : null);
 const file = ref(null);
 const photoUrl = ref(null);
 const closeModal = () => {
+      name.value = '';
+      phone.value =  '';
+      email.value =  '';
+      fileName.value = '';
+      preview.value = null;
+      file.value = null;
+      photoUrl.value = null;
+  store.commit("setSelectedContact", null);
   emits("emitDisplay");
 };
+
 const addNewContact = () => {
   if (name.value !== "" && phone.value !== "" && email.value !== "") {
     const enteredData = {
@@ -29,6 +46,7 @@ const addNewContact = () => {
 
   emits("emitDisplay");
 };
+
 const uploadHandler = () => {
   // Change name of uploaded image
   Object.defineProperty(file.value.files[0], "name", {
@@ -39,11 +57,13 @@ const uploadHandler = () => {
   photoUrl.value = file.value.files[0];
   preview.value = URL.createObjectURL(photoUrl.value);
 };
+
+
 </script>
 
 <template>
   <div
-    @click="closeModal"
+    @click.self="closeModal"
     class="backdrop fixed bottom-0 top-0 h-screen w-full bg-slate-800 opacity-50 z-[900]"
   ></div>
   <div
@@ -55,6 +75,7 @@ const uploadHandler = () => {
           class="flex justify-center items-center relative rounded-[50%] w-[120px] h-[120px] bg-gray-200"
         >
           <span class="text-gray-400 text-center" v-if="!preview">Profile</span>
+          
           <img
             v-else
             class="w-full rounded-[100%] max-h-[100%] object-cover"
@@ -92,7 +113,9 @@ const uploadHandler = () => {
         />
       </div>
       <div class="flex flex-col justify-center input-field w-full mt-4">
-        <label class="text-white mb-1" for="phone number">Número de telefone:</label>
+        <label class="text-white mb-1" for="phone number"
+          >Número de telefone:</label
+        >
         <input
           class="w-full px-2 py-1 rounded-lg border-none hover:border-none"
           type="phone"

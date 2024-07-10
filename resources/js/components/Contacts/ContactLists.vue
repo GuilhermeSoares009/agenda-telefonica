@@ -14,7 +14,7 @@ const props = defineProps({
   },
 });
 // Emits
-const emits = defineEmits(["emitHandler"]);
+const emits = defineEmits(["emitHandler", "emitEditContact"]);
 const store = useStore();
 
 const contacts = computed(() => {
@@ -28,6 +28,11 @@ const chooseContact = (contact) => {
   store.commit("setSelectedContact", contact);
   emits("emitHandler", true);
 };
+const editContact = (contact) => {
+  store.commit("setSelectedContact", contact);
+  emits("emitEditContact", true);
+};
+
 </script>
 
 <template>
@@ -49,7 +54,7 @@ const chooseContact = (contact) => {
         </div>
         <aside class="ml-3 flex flex-row" >
           <EyeIcon @click="chooseContact(contact)" class="h-8 w-8 mr-3 text-indigo-400 hover:text-indigo-500"/>
-          <PencilIcon @click="chooseContact(contact)" class="h-8 w-8 text-indigo-400 hover:text-indigo-500"/>
+          <PencilIcon @click="editContact(contact)" class="h-8 w-8 text-indigo-400 hover:text-indigo-500"/>
         </aside>
       </li>
     </ul>

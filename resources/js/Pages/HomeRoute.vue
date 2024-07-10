@@ -58,6 +58,8 @@ const showModal = () => {
 const closeModal = () => {
   displayModal.value = false;
 };
+
+
 </script>
 
 <template>
@@ -95,6 +97,7 @@ const closeModal = () => {
           <Contacts
             :filtered-contacts="filteredContacts"
             @emitHandler="clickEventCheck"
+            @emitEditContact="showModal"
           />
         </div>
       </template>
