@@ -6,7 +6,7 @@ Este projeto é uma aplicação frontend desenvolvida com Vue.js, Vue Router, Vu
 
 - [x] Fazer uma agenda telefônica (em formato de lista)
 - [x] Na tela específica de contato deve conter campos de telefone, nome, e-mail e imagem
-- [ ] DEVE ser possível cadastrar, atualizar, visualizar e apagar contatos da agenda (CRUD)
+- [x] DEVE ser possível cadastrar, atualizar, visualizar e apagar contatos da agenda (CRUD)
 - [x] O projeto deve ser responsivo para as medidas de desktop e mobile
 - [x] A aplicação DEVE ser feita em VueJs com back em Laravel e Banco de dados do tipo SQL
 
