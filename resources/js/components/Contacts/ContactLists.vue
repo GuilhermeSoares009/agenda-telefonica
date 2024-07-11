@@ -2,11 +2,8 @@
 import { useStore } from "vuex";
 import { computed } from "vue";
 import ContactImage from "./ContactImage.vue";
-import {
-  EyeIcon,
-  PencilIcon,
-  TrashIcon
-} from "@heroicons/vue/outline";
+import { EyeIcon, PencilIcon, TrashIcon } from "@heroicons/vue/outline";
+import usePhoneBook from "../../composables/usePhoneBook.js";
 // Props
 const props = defineProps({
   filteredContacts: {
@@ -17,6 +14,7 @@ const props = defineProps({
 // Emits
 const emits = defineEmits(["emitHandler", "emitEditContact"]);
 const store = useStore();
+const { deleteContact } = usePhoneBook();
 
 const contacts = computed(() => {
   if (!!props.filteredContacts && props.filteredContacts.length > 0) {
@@ -35,10 +33,9 @@ const editContact = (contact) => {
   emits("emitEditContact", true);
 };
 
-const deleteContact = (contactId) => {
+/* const deleteContact = (contactId) => {
   store.commit("deleteContact", contactId);
-};
-
+}; */
 </script>
 
 <template>
@@ -48,20 +45,29 @@ const deleteContact = (contactId) => {
         class="flex items-center justify-between p-2 hover:bg-gray-800 cursor-pointer"
         v-for="contact in contacts"
         :key="contact.id"
-        
       >
         <!-- Contact profile image-->
         <contact-image :image_url="contact.image_url"></contact-image>
         <!-- Contact info -->
         <div class="ml-2 flex w-full flex-col items-start justify-center">
           <h4 class="text-white text-[0.75rem]">{{ contact.name }}</h4>
-          <p class="text-gray-500 text-[0.75rem]">Telefone: {{ contact.phone }}</p>
-          <p class="text-gray-500 text-[0.75rem]">E-mail: {{ contact.email }}</p>
+          <p class="text-gray-500 text-[0.75rem]">
+            Telefone: {{ contact.phone }}
+          </p>
+          <p class="text-gray-500 text-[0.75rem]">
+            E-mail: {{ contact.email }}
+          </p>
         </div>
-        <aside class="ml-3 flex flex-row" >
+        <aside class="ml-3 flex flex-row">
           <!-- <EyeIcon @click="chooseContact(contact)" class="h-8 w-8 mr-3 text-indigo-400 hover:text-indigo-500"/> -->
-          <TrashIcon @click="deleteContact(contact.id)" class="h-8 w-8 text-indigo-400 hover:text-indigo-500 cursor-pointer"/>
-          <PencilIcon @click="editContact(contact)" class="h-8 w-8 text-indigo-400 hover:text-indigo-500"/>
+          <TrashIcon
+            @click="deleteContact(contact.id)"
+            class="h-8 w-8 text-indigo-400 hover:text-indigo-500 cursor-pointer"
+          />
+          <PencilIcon
+            @click="editContact(contact)"
+            class="h-8 w-8 text-indigo-400 hover:text-indigo-500"
+          />
         </aside>
       </li>
     </ul>

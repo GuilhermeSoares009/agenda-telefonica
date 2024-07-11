@@ -14,7 +14,18 @@ export default function usePhoneBook() {
           console.error("Erro ao buscar registros da agenda:", error);
         });
     }
+    
+    function deleteContact(contactId){
+        axios
+        .delete(`/api/agenda/${contactId}`)
+        .then(response => {
+            store.commit("deleteContact", contactId);
+          })
+        .catch(error => {
+            console.error('Erro ao deletar registro:', error);
+          });
+    }
 
-    return {update};
+    return {update, deleteContact};
 
 }

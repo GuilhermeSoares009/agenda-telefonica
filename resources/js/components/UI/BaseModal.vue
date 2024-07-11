@@ -34,14 +34,6 @@ const closeModal = () => {
 
 const addNewContact = () => {
   if (name.value !== "" && phone.value !== "" && email.value !== "") {
-    /*     const enteredData = {
-      id: new Date().toISOString(),
-      name: name.value,
-      phone: phone.value,
-      email: email.value,
-      image_url: file,
-    }; */
-
     const formData = new FormData();
     formData.append("name", name.value);
     formData.append("phone", phone.value);
