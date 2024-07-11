@@ -7,6 +7,21 @@ use Illuminate\Http\Request;
 
 class AgendaController extends Controller
 {
+
+    /**
+     * Lista todos os registros da agenda.
+     */
+    public function index()
+    {
+        $agenda = Agenda::all();
+
+        return response()->json([
+            'success' => true,
+            'data' => $agenda,
+        ]);
+    }
+
+
     /**
      * Store a newly created resource in storage.
      */
@@ -36,7 +51,9 @@ class AgendaController extends Controller
             'image_url' => 'nullable|string|max:255',
         ]);
 
+        
         $agenda->update($validatedData);
+
 
         return response()->json($agenda, 200);
     }
@@ -48,6 +65,6 @@ class AgendaController extends Controller
     {
         $agenda->delete();
 
-        return response()->json(null, 204);
+        return response()->json('Deletado', 204);
     }
 }

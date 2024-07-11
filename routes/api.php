@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\AgendaController;
+use App\Http\Middleware\Agenda;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('agenda')->group(function () {
-    Route::post('/agenda', [AgendaController::class, 'store']);
-    Route::put('/agenda/{id}', [AgendaController::class, 'update']);
-    Route::delete('/agenda/{id}', [AgendaController::class, 'destroy']);
+Route::middleware([Agenda::class])->group(function () {
+    Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda.index');
+    Route::post('/agenda/store', [AgendaController::class, 'store'])->name('agenda.store');
+    Route::put('/agenda/{agenda}', [AgendaController::class, 'update'])->name('agenda.update');
+    Route::delete('/agenda/{agenda}', [AgendaController::class, 'destroy'])->name('agenda.destroy');
 });
