@@ -8,6 +8,7 @@ Este projeto é uma aplicação frontend desenvolvida com Vue.js, Vue Router, Vu
 - npm ou yarn
 - PHP (versão 8.2.12)
 - Composer
+- Laravel 11
 
 ## Instalação
 
@@ -50,6 +51,9 @@ Este projeto é uma aplicação frontend desenvolvida com Vue.js, Vue Router, Vu
     DB_PASSWORD=sua_senha_bd
     ```
 
+2. Crie um banco de dados MySQL com o nome especificado em `DB_DATABASE` no arquivo `.env`.
+
+
 ## Uso
 
 1. Inicie o servidor de desenvolvimento para o frontend:
@@ -69,7 +73,7 @@ Este projeto é uma aplicação frontend desenvolvida com Vue.js, Vue Router, Vu
 3. Acesse a aplicação no navegador:
 
     ```bash
-    http://localhost:3000
+    http://127.0.0.1:8000
     ```
 
 ## Compilação para Produção
