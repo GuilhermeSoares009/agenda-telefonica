@@ -1,6 +1,14 @@
-# Projeto Vue.js com Laravel
+# Desafio Técnico - Projeto Vue.js com Laravel
 
 Este projeto é uma aplicação frontend desenvolvida com Vue.js, Vue Router, Vuex, TailwindCSS e Heroicons. Ele utiliza Vite como empacotador de módulos e Axios para requisições HTTP. A aplicação interage com uma API backend desenvolvida em Laravel.
+
+## Requisitos Obrigatórios
+
+- [x] Fazer uma agenda telefônica (em formato de lista)
+- [x] Na tela específica de contato deve conter campos de telefone, nome, e-mail e imagem
+- [ ] DEVE ser possível cadastrar, atualizar, visualizar e apagar contatos da agenda (CRUD)
+- [x] O projeto deve ser responsivo para as medidas de desktop e mobile
+- [x] A aplicação DEVE ser feita em VueJs com back em Laravel e Banco de dados do tipo SQL
 
 ## Requisitos
 
@@ -53,7 +61,6 @@ Este projeto é uma aplicação frontend desenvolvida com Vue.js, Vue Router, Vu
 
 2. Crie um banco de dados MySQL com o nome especificado em `DB_DATABASE` no arquivo `.env`.
 
-
 ## Uso
 
 1. Inicie o servidor de desenvolvimento para o frontend:
@@ -90,7 +97,7 @@ Este projeto é uma aplicação frontend desenvolvida com Vue.js, Vue Router, Vu
 
 ## Estrutura do Projeto
 
-1. Front-End:
+### Front-End:
 
 - `css/`: Arquivos CSS da aplicação (se houver).
 - `js/`: Código JavaScript da aplicação.
@@ -102,7 +109,8 @@ Este projeto é uma aplicação frontend desenvolvida com Vue.js, Vue Router, Vu
   - `store/`: Configuração e gerenciamento de estado da aplicação.
 - `views/`: Visualizações ou templates da aplicação.
 
-2. Backend
+### Backend:
+
 - `app/`: Contém a lógica principal da aplicação.
   - `Http/`: Controladores, middlewares e rotas HTTP.
     - `Controllers/`: Controladores da API.
