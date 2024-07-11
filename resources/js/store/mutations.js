@@ -16,5 +16,8 @@ export default {
     if (state.selectedContact && state.selectedContact.id === contactId) {
       state.selectedContact = null;
     }
+  },
+  setContacts(state, contacts) {
+    state.contacts = contacts;
   }
 };

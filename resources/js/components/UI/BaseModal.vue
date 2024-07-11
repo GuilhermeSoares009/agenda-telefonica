@@ -72,7 +72,6 @@ const updateContact = () => {
 };
 
 const handleSubmit = () => {
-  console.log("aqui");
   contact.value ? updateContact() : addNewContact();
 };
 </script>

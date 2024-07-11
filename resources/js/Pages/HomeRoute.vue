@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
-import axios from 'axios';
+import axios from "axios";
 import {
   ArrowCircleLeftIcon,
   StarIcon,
@@ -60,15 +60,15 @@ const closeModal = () => {
   displayModal.value = false;
 };
 
-
-axios.get('http://127.0.0.1:8000/api/test')
-.then((response) => {
-  console.log(response);
-})
-.catch((error) => {
-    console.error('Erro ao fazer a requisição:', error);
-  });
-
+  axios
+    .get("http://127.0.0.1:8000/api/agenda")
+    .then((response) => {
+      console.log(Object.values(response.data.data))
+      store.commit("setContacts", response.data.data);
+    })
+    .catch((error) => {
+      console.error("Erro ao buscar registros da agenda:", error);
+    });
 </script>
 
 <template>
@@ -80,14 +80,15 @@ axios.get('http://127.0.0.1:8000/api/test')
   >
     <!-- Contacts list-->
     <contact-card v-if="isContactPage">
-      <template #header>
-      </template>
+      <template #header> </template>
       <template #default>
         <div class="main-contents flex-col relative">
           <div
             class="mt-[1rem] title__containe flex items-center justify-between w-full"
           >
-            <h1 class="w-full title text-white text-[1.2rem]">Agenda Telefônica</h1>
+            <h1 class="w-full title text-white text-[1.2rem]">
+              Agenda Telefônica
+            </h1>
             <div class="w-full flex items-center justify-end h-[20px]">
               <button
                 @click="showModal"

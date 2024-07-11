@@ -25,6 +25,8 @@ const contacts = computed(() => {
     return store.getters.contactsList;
   }
 });
+
+console.log(contacts);
 const chooseContact = (contact) => {
   store.commit("setSelectedContact", contact);
   emits("emitHandler", true);
@@ -41,7 +43,7 @@ const deleteContact = (contactId) => {
 </script>
 
 <template>
-  <div class="flex w-full mt-2 max-h-[300px] overflow-y-auto">
+  <div class="flex w-full mt-2 max-h-[500px] overflow-y-auto">
     <ul class="h-[100%] w-full flex flex-col justify-center scroll-smooth">
       <li
         class="flex items-center justify-between p-2 hover:bg-gray-800 cursor-pointer"
