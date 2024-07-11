@@ -90,12 +90,28 @@ Este projeto é uma aplicação frontend desenvolvida com Vue.js, Vue Router, Vu
 
 ## Estrutura do Projeto
 
+1. Front-End:
+
 - `src/`: Contém os arquivos fonte do projeto.
   - `components/`: Componentes Vue.js.
   - `views/`: Páginas da aplicação.
   - `store/`: Arquivos Vuex para gerenciamento de estado.
   - `router/`: Configuração de rotas da aplicação.
   - `assets/`: Arquivos estáticos como imagens e estilos.
+
+2. Backend
+- `app/`: Contém a lógica principal da aplicação.
+  - `Http/`: Controladores, middlewares e rotas HTTP.
+    - `Controllers/`: Controladores da API.
+    - `Middleware/`: Middlewares para aplicar filtros às requisições HTTP.
+    - `Requests/`: Validações de requisições.
+  - `Models/`: Modelos de dados da aplicação.
+- `config/`: Configurações da aplicação.
+- `database/`: Arquivos relacionados ao banco de dados.
+  - `migrations/`: Migrações do banco de dados.
+- `public/`: Diretório público acessível pelo servidor web.
+- `routes/`: Definições de rotas da API.
+- `.env`: Arquivo de variáveis de ambiente.
 
 ## Contribuição
 
