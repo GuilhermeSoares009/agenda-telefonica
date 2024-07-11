@@ -10,5 +10,11 @@ export default {
   },
   setSelectedContact(state, payload) {
     state.selectedContact = payload;
+  },
+  deleteContact(state, contactId) {
+    state.contacts = state.contacts.filter(contact => contact.id !== contactId);
+    if (state.selectedContact && state.selectedContact.id === contactId) {
+      state.selectedContact = null;
+    }
   }
 };

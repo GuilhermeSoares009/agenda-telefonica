@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
+import axios from 'axios';
 import {
   ArrowCircleLeftIcon,
   StarIcon,
@@ -59,6 +60,14 @@ const closeModal = () => {
   displayModal.value = false;
 };
 
+
+axios.get('http://127.0.0.1:8000/api/test')
+.then((response) => {
+  console.log(response);
+})
+.catch((error) => {
+    console.error('Erro ao fazer a requisição:', error);
+  });
 
 </script>
 

@@ -4,7 +4,8 @@ import { computed } from "vue";
 import ContactImage from "./ContactImage.vue";
 import {
   EyeIcon,
-  PencilIcon
+  PencilIcon,
+  TrashIcon
 } from "@heroicons/vue/outline";
 // Props
 const props = defineProps({
@@ -33,6 +34,10 @@ const editContact = (contact) => {
   emits("emitEditContact", true);
 };
 
+const deleteContact = (contactId) => {
+  store.commit("deleteContact", contactId);
+};
+
 </script>
 
 <template>
@@ -53,7 +58,8 @@ const editContact = (contact) => {
           <p class="text-gray-500 text-[0.75rem]">E-mail: {{ contact.email }}</p>
         </div>
         <aside class="ml-3 flex flex-row" >
-          <EyeIcon @click="chooseContact(contact)" class="h-8 w-8 mr-3 text-indigo-400 hover:text-indigo-500"/>
+          <!-- <EyeIcon @click="chooseContact(contact)" class="h-8 w-8 mr-3 text-indigo-400 hover:text-indigo-500"/> -->
+          <TrashIcon @click="deleteContact(contact.id)" class="h-8 w-8 text-indigo-400 hover:text-indigo-500 cursor-pointer"/>
           <PencilIcon @click="editContact(contact)" class="h-8 w-8 text-indigo-400 hover:text-indigo-500"/>
         </aside>
       </li>
