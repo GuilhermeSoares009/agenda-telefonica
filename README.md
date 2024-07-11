@@ -4,9 +4,9 @@ Este projeto é uma aplicação frontend desenvolvida com Vue.js, Vue Router, Vu
 
 ## Requisitos
 
-- Node.js (versão 14 ou superior)
+- Node.js (versão 20.11.0)
 - npm ou yarn
-- PHP (versão 7.4 ou superior)
+- PHP (versão 8.2.12)
 - Composer
 
 ## Instalação
@@ -23,9 +23,7 @@ Este projeto é uma aplicação frontend desenvolvida com Vue.js, Vue Router, Vu
     cd agenda-telefonica
     ```
 
-### Frontend
-
-3. Instale as dependências do frontend:
+3. Instale as dependências do Node.js:
 
     ```bash
     npm install
@@ -33,21 +31,15 @@ Este projeto é uma aplicação frontend desenvolvida com Vue.js, Vue Router, Vu
     yarn install
     ```
 
-### Backend
-
-4. Navegue até o diretório do backend (Laravel):
-
-    ```bash
-    cd backend
-    ```
-
-5. Instale as dependências do Laravel:
+4. Instale as dependências do PHP com o Composer:
 
     ```bash
     composer install
     ```
 
-6. Crie um arquivo `.env` na raiz do projeto Laravel e configure suas variáveis de ambiente conforme necessário. Exemplo:
+## Configuração
+
+1. Crie um arquivo `.env` na raiz do projeto e configure suas variáveis de ambiente conforme necessário. Exemplo:
 
     ```env
     DB_CONNECTION=mysql
@@ -58,21 +50,9 @@ Este projeto é uma aplicação frontend desenvolvida com Vue.js, Vue Router, Vu
     DB_PASSWORD=sua_senha_bd
     ```
 
-7. Gere a chave da aplicação Laravel:
-
-    ```bash
-    php artisan key:generate
-    ```
-
-8. Execute as migrações do banco de dados:
-
-    ```bash
-    php artisan migrate
-    ```
-
 ## Uso
 
-1. Inicie o servidor de desenvolvimento frontend:
+1. Inicie o servidor de desenvolvimento para o frontend:
 
     ```bash
     npm run dev
@@ -80,13 +60,13 @@ Este projeto é uma aplicação frontend desenvolvida com Vue.js, Vue Router, Vu
     yarn dev
     ```
 
-    Em outra aba do terminal, inicie o servidor Laravel:
+2. Em outra aba do terminal, inicie o servidor Laravel:
 
     ```bash
     php artisan serve
     ```
 
-2. Acesse a aplicação no navegador:
+3. Acesse a aplicação no navegador:
 
     ```bash
     http://localhost:3000
