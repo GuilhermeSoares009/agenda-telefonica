@@ -13,12 +13,16 @@ import BaseSearch from "../components/UI/BaseSearch.vue";
 import BaseButton from "../components/UI/BaseButton.vue";
 import ContactInfo from "../components/Contacts/ContactInfo.vue";
 import Contacts from "../components/Contacts/ContactLists.vue";
+import usePhoneBook from "../composables/usePhoneBook.js";
 // Variables
 const store = useStore();
 const isContactPage = ref(true);
 const isChosen = ref(false);
 const filteredContacts = ref([]);
 const displayModal = ref(false);
+const { update } = usePhoneBook();
+
+
 // functions
 const filterContacts = (enteredValue) => {
   filteredContacts.value = [];
@@ -60,14 +64,19 @@ const closeModal = () => {
   displayModal.value = false;
 };
 
-  axios
+/*   axios
     .get("http://127.0.0.1:8000/api/agenda")
     .then((response) => {
       store.commit("setContacts", response.data.data);
     })
     .catch((error) => {
       console.error("Erro ao buscar registros da agenda:", error);
-    });
+    }); */
+
+    update();
+
+
+
 </script>
 
 <template>

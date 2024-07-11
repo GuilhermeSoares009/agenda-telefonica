@@ -11,8 +11,18 @@ const props = defineProps({
     required: false,
   },
 });
+const verifyLink = (link) => {
+
+  if( link != undefined)
+  {
+    return !link.startsWith('blob:') ? 'http://127.0.0.1:8000/storage/' + link : link;
+  }
+  return link;
+}
+
 const imageSource = computed(() => {
-  return props.image_url;
+
+  return verifyLink(props.image_url);
 });
 </script>
 

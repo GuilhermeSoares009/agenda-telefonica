@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
+import usePhoneBook from "../../composables/usePhoneBook.js";
 
 const emits = defineEmits(["emitDisplay"]);
 const store = useStore();
@@ -17,6 +18,8 @@ const fileName = ref("");
 const preview = ref(contact.value ? contact.value.image_url : null);
 const file = ref(null);
 const photoUrl = ref(null);
+const { update } = usePhoneBook();
+
 const closeModal = () => {
   name.value = "";
   phone.value = "";
@@ -31,7 +34,6 @@ const closeModal = () => {
 
 const addNewContact = () => {
   if (name.value !== "" && phone.value !== "" && email.value !== "") {
-    console.log(file.value);
     /*     const enteredData = {
       id: new Date().toISOString(),
       name: name.value,
@@ -48,9 +50,8 @@ const addNewContact = () => {
 
     axios
       .post("http://127.0.0.1:8000/api/agenda/store", formData)
-      .then((response) => {
-        console.log(response.data);
-        store.commit("createNewContact", response.data.data);
+      .then( async (response) => {
+        await update();
         emits("emitDisplay");
       })
       .catch((error) => {
@@ -93,14 +94,13 @@ const handleSubmit = () => {
 };
 
 const verifyLink = (link) => {
-  if(link.length != 0)
-  {
-    console.log(!link.startsWith('blob:') ? 'http://127.0.0.1:8000/storage/' + link : link);
-    return !link.startsWith('blob:') ? 'http://127.0.0.1:8000/storage/' + link : link;
+  if (link != undefined) {
+    return !link.startsWith("blob:")
+      ? "http://127.0.0.1:8000/storage/" + link
+      : link;
   }
-
-  return 'teste';
-}
+  return link;
+};
 </script>
 
 <template>
@@ -115,9 +115,8 @@ const verifyLink = (link) => {
       <div class="mb-4 flex text-center justify-center items-center">
         <div
           class="flex justify-center items-center relative rounded-[50%] w-[120px] h-[120px] bg-gray-200"
-        >{{console.log(preview)}}
+        >
           <span class="text-gray-400 text-center" v-if="!preview">Profile</span>
-          
 
           <img
             v-else

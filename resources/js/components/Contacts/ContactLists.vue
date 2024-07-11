@@ -26,7 +26,6 @@ const contacts = computed(() => {
   }
 });
 
-console.log(contacts);
 const chooseContact = (contact) => {
   store.commit("setSelectedContact", contact);
   emits("emitHandler", true);
@@ -52,7 +51,7 @@ const deleteContact = (contactId) => {
         
       >
         <!-- Contact profile image-->
-        <contact-image :image-url="contact.image_url"></contact-image>
+        <contact-image :image_url="contact.image_url"></contact-image>
         <!-- Contact info -->
         <div class="ml-2 flex w-full flex-col items-start justify-center">
           <h4 class="text-white text-[0.75rem]">{{ contact.name }}</h4>
