@@ -92,12 +92,15 @@ Este projeto é uma aplicação frontend desenvolvida com Vue.js, Vue Router, Vu
 
 1. Front-End:
 
-- `src/`: Contém os arquivos fonte do projeto.
-  - `components/`: Componentes Vue.js.
-  - `views/`: Páginas da aplicação.
-  - `store/`: Arquivos Vuex para gerenciamento de estado.
-  - `router/`: Configuração de rotas da aplicação.
-  - `assets/`: Arquivos estáticos como imagens e estilos.
+- `css/`: Arquivos CSS da aplicação (se houver).
+- `js/`: Código JavaScript da aplicação.
+  - `components/`: Componentes JavaScript da aplicação.
+    - `Contacts/`: Componentes relacionados aos contatos (se aplicável).
+    - `UI/`: Componentes de interface de usuário compartilhados.
+  - `composables/`: Lógica reutilizável (composables).
+  - `Pages/`: Páginas da aplicação ou controladores (se for organizado dessa forma).
+  - `store/`: Configuração e gerenciamento de estado da aplicação.
+- `views/`: Visualizações ou templates da aplicação.
 
 2. Backend
 - `app/`: Contém a lógica principal da aplicação.
