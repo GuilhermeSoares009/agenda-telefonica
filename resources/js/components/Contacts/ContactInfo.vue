@@ -15,7 +15,7 @@ const contact = computed(() => {
   >
     <contact-image
       :image-index="contact.id"
-      :image-url="contact.imageUrl"
+      :image-url="contact.image_url"
       image-size="w-full rounded-lg w-full"
     />
   </div>

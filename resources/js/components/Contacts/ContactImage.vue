@@ -6,13 +6,13 @@ const props = defineProps({
     required: false,
     default: ["w-[50px]"],
   },
-  imageUrl: {
+  image_url: {
     type: String,
     required: false,
   },
 });
 const imageSource = computed(() => {
-  return props.imageUrl;
+  return props.image_url;
 });
 </script>
 

@@ -31,8 +31,16 @@ class AgendaController extends Controller
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'email' => 'required|email|max:255',
-            'image_url' => 'nullable|string|max:255',
+            'image_url' => 'nullable',
         ]);
+
+        // Check if the request has an image
+        if ($request->hasFile('image_url')) {
+            // Store the image and get the path
+            $imagePath = $request->file('image_url')->store('images', 'public');
+            $validatedData['image_url'] = $imagePath;
+        }
+
 
         $agenda = Agenda::create($validatedData);
 
@@ -51,7 +59,7 @@ class AgendaController extends Controller
             'image_url' => 'nullable|string|max:255',
         ]);
 
-        
+
         $agenda->update($validatedData);
 
 

@@ -52,7 +52,7 @@ const deleteContact = (contactId) => {
         
       >
         <!-- Contact profile image-->
-        <contact-image :image-url="contact.imageUrl"></contact-image>
+        <contact-image :image-url="contact.image_url"></contact-image>
         <!-- Contact info -->
         <div class="ml-2 flex w-full flex-col items-start justify-center">
           <h4 class="text-white text-[0.75rem]">{{ contact.name }}</h4>

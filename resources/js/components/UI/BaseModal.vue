@@ -14,7 +14,7 @@ const name = ref(contact.value ? contact.value.name : "");
 const phone = ref(contact.value ? contact.value.phone : "");
 const email = ref(contact.value ? contact.value.email : "");
 const fileName = ref("");
-const preview = ref(contact.value ? contact.value.imageUrl : null);
+const preview = ref(contact.value ? contact.value.image_url : null);
 const file = ref(null);
 const photoUrl = ref(null);
 const closeModal = () => {
@@ -31,14 +31,31 @@ const closeModal = () => {
 
 const addNewContact = () => {
   if (name.value !== "" && phone.value !== "" && email.value !== "") {
-    const enteredData = {
+    console.log(file.value);
+    /*     const enteredData = {
       id: new Date().toISOString(),
       name: name.value,
       phone: phone.value,
       email: email.value,
-      imageUrl: preview.value,
-    };
-    store.commit("createNewContact", enteredData);
+      image_url: file,
+    }; */
+
+    const formData = new FormData();
+    formData.append("name", name.value);
+    formData.append("phone", phone.value);
+    formData.append("email", email.value);
+    formData.append("image_url", file.value.files[0]);
+
+    axios
+      .post("http://127.0.0.1:8000/api/agenda/store", formData)
+      .then((response) => {
+        console.log(response.data);
+        store.commit("createNewContact", response.data.data);
+        emits("emitDisplay");
+      })
+      .catch((error) => {
+        console.error("Erro ao criar registro:", error);
+      });
   }
 
   emits("emitDisplay");
@@ -62,7 +79,7 @@ const updateContact = () => {
       name: name.value,
       phone: phone.value,
       email: email.value,
-      imageUrl: preview.value,
+      image_url: preview.value,
     };
 
     store.commit("updateContact", updatedData);
@@ -74,6 +91,16 @@ const updateContact = () => {
 const handleSubmit = () => {
   contact.value ? updateContact() : addNewContact();
 };
+
+const verifyLink = (link) => {
+  if(link.length != 0)
+  {
+    console.log(!link.startsWith('blob:') ? 'http://127.0.0.1:8000/storage/' + link : link);
+    return !link.startsWith('blob:') ? 'http://127.0.0.1:8000/storage/' + link : link;
+  }
+
+  return 'teste';
+}
 </script>
 
 <template>
@@ -88,13 +115,14 @@ const handleSubmit = () => {
       <div class="mb-4 flex text-center justify-center items-center">
         <div
           class="flex justify-center items-center relative rounded-[50%] w-[120px] h-[120px] bg-gray-200"
-        >
+        >{{console.log(preview)}}
           <span class="text-gray-400 text-center" v-if="!preview">Profile</span>
+          
 
           <img
             v-else
             class="w-full rounded-[100%] max-h-[100%] object-cover"
-            :src="preview"
+            :src="verifyLink(preview)"
             alt="profile"
           />
         </div>

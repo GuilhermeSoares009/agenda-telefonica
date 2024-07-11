@@ -63,7 +63,6 @@ const closeModal = () => {
   axios
     .get("http://127.0.0.1:8000/api/agenda")
     .then((response) => {
-      console.log(Object.values(response.data.data))
       store.commit("setContacts", response.data.data);
     })
     .catch((error) => {
