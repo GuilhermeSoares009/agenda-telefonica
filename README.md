@@ -2,6 +2,10 @@
 
 Este projeto é uma aplicação frontend desenvolvida com Vue.js, Vue Router, Vuex, TailwindCSS e Heroicons. Ele utiliza Vite como empacotador de módulos e Axios para requisições HTTP. A aplicação interage com uma API backend desenvolvida em Laravel.
 
+## Apresentação - Youtube
+
+https://youtu.be/v5sLhSbLU-Q
+
 ## Requisitos Obrigatórios
 
 - [x] Fazer uma agenda telefônica (em formato de lista)

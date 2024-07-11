@@ -18,6 +18,7 @@ const fileName = ref("");
 const preview = ref(contact.value ? contact.value.image_url : null);
 const file = ref(null);
 const photoUrl = ref(null);
+let photoTemp = ref("");
 const { update } = usePhoneBook();
 
 const closeModal = () => {
@@ -25,6 +26,7 @@ const closeModal = () => {
   phone.value = "";
   email.value = "";
   fileName.value = "";
+  photoTemp = "";
   preview.value = null;
   file.value = null;
   photoUrl.value = null;
@@ -42,7 +44,7 @@ const addNewContact = () => {
 
     axios
       .post("http://127.0.0.1:8000/api/agenda/store", formData)
-      .then( async (response) => {
+      .then(async (response) => {
         await update();
         emits("emitDisplay");
       })
@@ -67,15 +69,25 @@ const uploadHandler = () => {
 
 const updateContact = () => {
   if (name.value !== "" && phone.value !== "" && email.value !== "") {
-    const updatedData = {
-      id: contact.value.id,
-      name: name.value,
-      phone: phone.value,
-      email: email.value,
-      image_url: preview.value,
-    };
+    const formData = new FormData();
+    formData.append("name", name.value);
+    formData.append("phone", phone.value);
+    formData.append("email", email.value);
+    formData.append("image_url", photoTemp);
 
-    store.commit("updateContact", updatedData);
+    axios
+      .post(`http://127.0.0.1:8000/api/agenda/${contact.value.id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then(async (response) => {
+        await update();
+        emits("emitDisplay");
+      })
+      .catch((error) => {
+        console.error("Erro ao criar registro:", error);
+      });
   }
 
   closeModal();
@@ -86,6 +98,7 @@ const handleSubmit = () => {
 };
 
 const verifyLink = (link) => {
+  photoTemp = link;
   if (link != undefined) {
     return !link.startsWith("blob:")
       ? "http://127.0.0.1:8000/storage/" + link

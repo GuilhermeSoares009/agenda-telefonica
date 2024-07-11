@@ -64,15 +64,6 @@ const closeModal = () => {
   displayModal.value = false;
 };
 
-/*   axios
-    .get("http://127.0.0.1:8000/api/agenda")
-    .then((response) => {
-      store.commit("setContacts", response.data.data);
-    })
-    .catch((error) => {
-      console.error("Erro ao buscar registros da agenda:", error);
-    }); */
-
     update();
 
 

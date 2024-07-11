@@ -42,8 +42,7 @@ class AgendaController extends Controller
         }
 
 
-        Agenda::create($validatedData);
-        $agenda = Agenda::all();
+        $agenda = Agenda::create($validatedData);
 
         return response()->json([
             'success' => true,
