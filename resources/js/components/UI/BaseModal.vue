@@ -86,7 +86,7 @@ const updateContact = () => {
         emits("emitDisplay");
       })
       .catch((error) => {
-        console.error("Erro ao criar registro:", error);
+        console.error( {'error':error, 'message': error.error.response.data.message});
       });
   }
 
@@ -166,8 +166,8 @@ const verifyLink = (link) => {
         <input
           class="w-full px-2 py-1 rounded-lg border-none hover:border-none"
           type="phone"
-          min="8"
-          max="14"
+          minlength="8"
+          maxlength="14"
           placeholder="+98"
           v-model.trim="phone"
         />
